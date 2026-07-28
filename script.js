@@ -32,6 +32,67 @@
     });
   });
 
+  var canUsePointer = window.matchMedia("(pointer: fine)").matches;
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (canUsePointer && !reduceMotion) {
+    document.body.classList.add("has-pointer");
+    var nextX = window.innerWidth / 2;
+    var nextY = window.innerHeight / 2;
+    var raf = null;
+
+    function updatePointerVars() {
+      root.style.setProperty("--mouse-x", nextX + "px");
+      root.style.setProperty("--mouse-y", nextY + "px");
+      raf = null;
+    }
+
+    window.addEventListener("pointermove", function (event) {
+      nextX = event.clientX;
+      nextY = event.clientY;
+      if (!raf) raf = window.requestAnimationFrame(updatePointerVars);
+    });
+
+    document.querySelectorAll("[data-tilt]").forEach(function (card) {
+      card.addEventListener("pointermove", function (event) {
+        var rect = card.getBoundingClientRect();
+        var x = (event.clientX - rect.left) / rect.width - 0.5;
+        var y = (event.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform =
+          "perspective(900px) rotateX(" +
+          (-y * 4).toFixed(2) +
+          "deg) rotateY(" +
+          (x * 5).toFixed(2) +
+          "deg) translateY(-2px)";
+      });
+      card.addEventListener("pointerleave", function () {
+        card.style.transform = "";
+      });
+    });
+  }
+
+  var revealItems = Array.from(document.querySelectorAll(".reveal"));
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.16 }
+    );
+    revealItems.forEach(function (item) {
+      observer.observe(item);
+    });
+  } else {
+    revealItems.forEach(function (item) {
+      item.classList.add("visible");
+    });
+  }
+
   var lightbox = document.querySelector("[data-lightbox-root]");
   var lightboxImage = lightbox ? lightbox.querySelector("img") : null;
   var closeButton = document.querySelector("[data-lightbox-close]");
