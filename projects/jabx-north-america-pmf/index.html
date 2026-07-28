@@ -13,27 +13,31 @@
   </head>
   <body>
     <a class="skip-link" href="#main">跳到主要内容</a>
-    <div class="cursor-ambient" aria-hidden="true"></div>
-    <div class="cursor-dot" aria-hidden="true"></div>
-    <div class="cursor-ring" aria-hidden="true"></div>
-    <header class="site-header">
-      <a class="brand" href="../../" aria-label="回到首页">
-        <span>YUAN-Y00.GITHUB.IO</span>
-      </a>
-      <nav class="main-nav" aria-label="主导航">
-        <a href="../../#top">Home</a>
-        <a href="../../#work">Projects</a>
-        <a href="../../#experience">Experience</a>
-      </nav>
-      <div class="header-tools" aria-label="显示设置">
-        <button class="font-toggle" type="button" data-font-toggle aria-label="切换字体">
-          Aa SANS
+    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+    <nav class="navbar" aria-label="主导航">
+      <div class="navbar-blur" aria-hidden="true"><div></div><div></div><div></div></div>
+      <div class="container nav-container">
+        <a class="nav-brand" href="../../">YUAN-Y00.GITHUB.IO</a>
+        <ul class="nav-menu">
+          <li><a href="../../#home" class="nav-link">Home</a></li>
+          <li><a href="../../#cad-gallery" class="nav-link">Projects</a></li>
+          <li><a href="../../#experience" class="nav-link">Experience</a></li>
+        </ul>
+        <button id="font-toggle" class="font-toggle" type="button" data-font-toggle title="Change font">
+          Aa <span id="font-label">SANS</span>
         </button>
-        <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换明暗主题">
-          ◐
+        <button id="theme-toggle" class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode" title="Toggle dark mode">
+          <span class="icon-sun" aria-hidden="true">☀</span>
+          <span class="icon-moon" aria-hidden="true">☾</span>
+        </button>
+        <button class="hamburger" type="button" aria-label="打开菜单" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
-    </header>
+    </nav>
 
     <main id="main" class="case-main">
       <section class="case-hero">

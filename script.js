@@ -1,5 +1,7 @@
 (function () {
   var root = document.documentElement;
+  root.classList.add("js-enabled");
+
   var themeKey = "yuan-portfolio-theme";
   var fontKey = "yuan-portfolio-font";
   var savedTheme = window.localStorage.getItem(themeKey);
@@ -15,18 +17,17 @@
 
   var themeButton = document.querySelector("[data-theme-toggle]");
   var fontButton = document.querySelector("[data-font-toggle]");
-
-  function syncThemeButton() {
-    if (!themeButton) return;
-    themeButton.textContent = root.dataset.theme === "dark" ? "☼" : "◐";
-  }
+  var fontLabel = document.querySelector("#font-label");
 
   function syncFontButton() {
-    if (!fontButton) return;
-    fontButton.textContent = root.dataset.font === "serif" ? "Aa SERIF" : "Aa SANS";
+    var label = root.dataset.font === "serif" ? "SERIF" : "SANS";
+    if (fontLabel) {
+      fontLabel.textContent = label;
+    } else if (fontButton) {
+      fontButton.textContent = "Aa " + label;
+    }
   }
 
-  syncThemeButton();
   syncFontButton();
 
   if (themeButton) {
@@ -34,7 +35,6 @@
       var nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
       root.dataset.theme = nextTheme;
       window.localStorage.setItem(themeKey, nextTheme);
-      syncThemeButton();
     });
   }
 
@@ -47,30 +47,33 @@
     });
   }
 
-  var filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
-  var projectCards = Array.from(document.querySelectorAll("[data-categories]"));
+  var hamburger = document.querySelector(".hamburger");
+  var navMenu = document.querySelector(".nav-menu");
 
-  filterButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      var filter = button.dataset.filter || "all";
-      filterButtons.forEach(function (item) {
-        item.classList.toggle("active", item === button);
-      });
-      projectCards.forEach(function (card) {
-        var categories = card.dataset.categories || "";
-        card.hidden = filter !== "all" && !categories.includes(filter);
+  if (hamburger && navMenu) {
+    hamburger.addEventListener("click", function () {
+      var isOpen = navMenu.classList.toggle("active");
+      hamburger.classList.toggle("active", isOpen);
+      hamburger.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navMenu.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navMenu.classList.remove("active");
+        hamburger.classList.remove("active");
+        hamburger.setAttribute("aria-expanded", "false");
       });
     });
-  });
+  }
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var finePointer = window.matchMedia("(pointer: fine)").matches;
-  var cursorDot = document.querySelector(".cursor-dot");
-  var cursorRing = document.querySelector(".cursor-ring");
+  var cursorDot = document.querySelector("#cursorDot");
+  var cursorRing = document.querySelector("#cursorRing");
 
   if (finePointer && !reduceMotion && cursorDot && cursorRing) {
-    document.body.classList.add("has-pointer");
     root.classList.add("has-custom-cursor");
+    document.body.classList.add("has-pointer");
 
     var targetX = window.innerWidth / 2;
     var targetY = window.innerHeight / 2;
@@ -80,13 +83,10 @@
     var ringY = targetY;
 
     function renderCursor() {
-      dotX += (targetX - dotX) * 0.65;
-      dotY += (targetY - dotY) * 0.65;
+      dotX += (targetX - dotX) * 0.72;
+      dotY += (targetY - dotY) * 0.72;
       ringX += (targetX - ringX) * 0.18;
       ringY += (targetY - ringY) * 0.18;
-
-      root.style.setProperty("--mouse-x", targetX + "px");
-      root.style.setProperty("--mouse-y", targetY + "px");
       cursorDot.style.transform = "translate(" + dotX + "px, " + dotY + "px) translate(-50%, -50%)";
       cursorRing.style.transform = "translate(" + ringX + "px, " + ringY + "px) translate(-50%, -50%)";
       window.requestAnimationFrame(renderCursor);
@@ -97,38 +97,56 @@
       targetY = event.clientY;
     });
 
-    document.querySelectorAll("a, button, [data-cursor-label], [data-tilt]").forEach(function (item) {
+    document.querySelectorAll("a, button, .cad-photo-wrap").forEach(function (item) {
       item.addEventListener("pointerenter", function () {
-        document.body.classList.add("cursor-active");
-        cursorRing.dataset.label = item.dataset.cursorLabel || "";
+        document.body.classList.add("cursor-hover");
       });
       item.addEventListener("pointerleave", function () {
-        document.body.classList.remove("cursor-active");
-        cursorRing.dataset.label = "";
+        document.body.classList.remove("cursor-hover");
       });
     });
 
     window.requestAnimationFrame(renderCursor);
   }
 
-  if (finePointer && !reduceMotion) {
-    document.querySelectorAll("[data-tilt]").forEach(function (card) {
-      card.addEventListener("pointermove", function (event) {
-        var rect = card.getBoundingClientRect();
-        var x = (event.clientX - rect.left) / rect.width - 0.5;
-        var y = (event.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform =
-          "perspective(900px) rotateX(" +
-          (-y * 3.5).toFixed(2) +
-          "deg) rotateY(" +
-          (x * 4.5).toFixed(2) +
-          "deg)";
-      });
-      card.addEventListener("pointerleave", function () {
-        card.style.transform = "";
-      });
+  var srItems = Array.from(document.querySelectorAll(".sr"));
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    var srObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("sr-visible");
+            srObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+    );
+
+    srItems.forEach(function (item) {
+      srObserver.observe(item);
+    });
+  } else {
+    srItems.forEach(function (item) {
+      item.classList.add("sr-visible");
     });
   }
+
+  var filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
+  var galleryItems = Array.from(document.querySelectorAll(".cad-photo-wrap[data-category]"));
+
+  filterButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      var filter = button.dataset.filter || "all";
+      filterButtons.forEach(function (item) {
+        item.classList.toggle("active", item === button);
+      });
+      galleryItems.forEach(function (item) {
+        var categories = item.dataset.category || "";
+        item.classList.toggle("cad-filtered-out", filter !== "all" && !categories.includes(filter));
+      });
+    });
+  });
 
   document.querySelectorAll("[data-live-loop]").forEach(function (board) {
     var handle = board.querySelector(".loop-handle");
@@ -162,51 +180,141 @@
     handle.addEventListener("pointercancel", function () {
       dragging = false;
     });
+  });
 
-    board.addEventListener("pointermove", function (event) {
-      if (dragging) moveHandle(event);
+  var sidebar = document.querySelector("#scroll-sidebar");
+  var sidebarFill = document.querySelector("#sidebar-fill");
+  var sidebarDots = Array.from(document.querySelectorAll(".sdot[data-target]"));
+  var trackedSections = sidebarDots
+    .map(function (dot) {
+      return document.getElementById(dot.dataset.target);
+    })
+    .filter(Boolean);
+
+  function updateSidebar() {
+    if (!sidebar || !trackedSections.length) return;
+
+    var scrollY = window.scrollY || window.pageYOffset;
+    var docHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    sidebar.classList.toggle("visible", scrollY > 240);
+
+    if (sidebarFill) {
+      sidebarFill.style.height = Math.min(100, Math.max(0, (scrollY / docHeight) * 100)) + "%";
+    }
+
+    var current = trackedSections[0].id;
+    trackedSections.forEach(function (section) {
+      if (section.getBoundingClientRect().top < window.innerHeight * 0.42) {
+        current = section.id;
+      }
+    });
+
+    sidebarDots.forEach(function (dot) {
+      dot.classList.toggle("active", dot.dataset.target === current);
+    });
+  }
+
+  sidebarDots.forEach(function (dot) {
+    dot.addEventListener("click", function () {
+      var section = document.getElementById(dot.dataset.target);
+      if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
 
-  var revealItems = Array.from(document.querySelectorAll(".reveal"));
-  if ("IntersectionObserver" in window && !reduceMotion) {
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.14 }
-    );
-    revealItems.forEach(function (item) {
-      observer.observe(item);
+  window.addEventListener("scroll", updateSidebar, { passive: true });
+  window.addEventListener("resize", updateSidebar);
+  updateSidebar();
+
+  var modal = document.querySelector("#photo-modal");
+  var modalImage = document.querySelector("#pm-img");
+  var modalTitle = document.querySelector("#pm-title");
+  var modalDesc = document.querySelector("#pm-desc");
+  var modalTools = document.querySelector("#pm-tools-list");
+  var modalLink = document.querySelector("#pm-link");
+  var lastFocused = null;
+
+  function closeProjectModal() {
+    if (!modal || !modalImage) return;
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    modalImage.removeAttribute("src");
+    modalImage.alt = "";
+    if (lastFocused) lastFocused.focus();
+  }
+
+  function openProjectModal(card) {
+    if (!modal || !modalImage || !modalTitle || !modalDesc || !modalTools) return;
+    lastFocused = document.activeElement;
+    var copy = card.querySelector(".modal-copy");
+    var title = card.dataset.title || card.innerText.trim();
+    var desc = copy ? copy.innerText.trim() : "";
+    var image = card.dataset.image || "";
+    var tools = (card.dataset.tools || "").split("|").filter(Boolean);
+
+    modalTitle.textContent = title;
+    modalDesc.textContent = desc;
+    modalImage.src = image;
+    modalImage.alt = title;
+    modalTools.innerHTML = "";
+    tools.forEach(function (tool) {
+      var tag = document.createElement("span");
+      tag.className = "pm-tool-tag";
+      tag.textContent = tool;
+      modalTools.appendChild(tag);
     });
-  } else {
-    revealItems.forEach(function (item) {
-      item.classList.add("visible");
+
+    if (modalLink) {
+      if (card.dataset.link) {
+        modalLink.href = card.dataset.link;
+        modalLink.style.display = "";
+      } else {
+        modalLink.style.display = "none";
+      }
+    }
+
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    var closeButton = modal.querySelector(".pm-close");
+    if (closeButton) closeButton.focus();
+  }
+
+  galleryItems.forEach(function (card) {
+    card.tabIndex = 0;
+    card.addEventListener("click", function (event) {
+      if (event.target.closest(".loop-handle")) return;
+      openProjectModal(card);
+    });
+    card.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openProjectModal(card);
+      }
+    });
+  });
+
+  if (modal) {
+    modal.querySelectorAll("[data-modal-close]").forEach(function (closer) {
+      closer.addEventListener("click", closeProjectModal);
     });
   }
 
   var lightbox = document.querySelector("[data-lightbox-root]");
   var lightboxImage = lightbox ? lightbox.querySelector("img") : null;
   var closeButton = document.querySelector("[data-lightbox-close]");
-  var lastFocused = null;
+  var lastLightboxFocus = null;
 
   function closeLightbox() {
     if (!lightbox || !lightboxImage) return;
     lightbox.classList.remove("open");
     lightbox.setAttribute("aria-hidden", "true");
     lightboxImage.removeAttribute("src");
-    if (lastFocused) lastFocused.focus();
+    if (lastLightboxFocus) lastLightboxFocus.focus();
   }
 
   document.querySelectorAll("[data-lightbox-src]").forEach(function (button) {
     button.addEventListener("click", function () {
       if (!lightbox || !lightboxImage) return;
-      lastFocused = button;
+      lastLightboxFocus = button;
       lightboxImage.src = button.dataset.lightboxSrc;
       lightboxImage.alt = button.dataset.lightboxAlt || "";
       lightbox.classList.add("open");
@@ -221,7 +329,11 @@
       if (event.target === lightbox) closeLightbox();
     });
   }
+
   document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") closeLightbox();
+    if (event.key === "Escape") {
+      closeProjectModal();
+      closeLightbox();
+    }
   });
 })();
