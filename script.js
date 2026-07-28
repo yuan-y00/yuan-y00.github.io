@@ -1,18 +1,49 @@
 (function () {
-  var storageKey = "yuan-portfolio-theme";
   var root = document.documentElement;
-  var savedTheme = window.localStorage.getItem(storageKey);
+  var themeKey = "yuan-portfolio-theme";
+  var fontKey = "yuan-portfolio-font";
+  var savedTheme = window.localStorage.getItem(themeKey);
+  var savedFont = window.localStorage.getItem(fontKey);
 
   if (savedTheme === "dark" || savedTheme === "light") {
     root.dataset.theme = savedTheme;
   }
 
+  if (savedFont === "serif" || savedFont === "sans") {
+    root.dataset.font = savedFont;
+  }
+
   var themeButton = document.querySelector("[data-theme-toggle]");
+  var fontButton = document.querySelector("[data-font-toggle]");
+
+  function syncThemeButton() {
+    if (!themeButton) return;
+    themeButton.textContent = root.dataset.theme === "dark" ? "☼" : "◐";
+  }
+
+  function syncFontButton() {
+    if (!fontButton) return;
+    fontButton.textContent = root.dataset.font === "serif" ? "Aa SERIF" : "Aa SANS";
+  }
+
+  syncThemeButton();
+  syncFontButton();
+
   if (themeButton) {
     themeButton.addEventListener("click", function () {
       var nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
       root.dataset.theme = nextTheme;
-      window.localStorage.setItem(storageKey, nextTheme);
+      window.localStorage.setItem(themeKey, nextTheme);
+      syncThemeButton();
+    });
+  }
+
+  if (fontButton) {
+    fontButton.addEventListener("click", function () {
+      var nextFont = root.dataset.font === "serif" ? "sans" : "serif";
+      root.dataset.font = nextFont;
+      window.localStorage.setItem(fontKey, nextFont);
+      syncFontButton();
     });
   }
 
@@ -21,7 +52,7 @@
 
   filterButtons.forEach(function (button) {
     button.addEventListener("click", function () {
-      var filter = button.dataset.filter;
+      var filter = button.dataset.filter || "all";
       filterButtons.forEach(function (item) {
         item.classList.toggle("active", item === button);
       });
@@ -32,27 +63,55 @@
     });
   });
 
-  var canUsePointer = window.matchMedia("(pointer: fine)").matches;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia("(pointer: fine)").matches;
+  var cursorDot = document.querySelector(".cursor-dot");
+  var cursorRing = document.querySelector(".cursor-ring");
 
-  if (canUsePointer && !reduceMotion) {
+  if (finePointer && !reduceMotion && cursorDot && cursorRing) {
     document.body.classList.add("has-pointer");
-    var nextX = window.innerWidth / 2;
-    var nextY = window.innerHeight / 2;
-    var raf = null;
+    root.classList.add("has-custom-cursor");
 
-    function updatePointerVars() {
-      root.style.setProperty("--mouse-x", nextX + "px");
-      root.style.setProperty("--mouse-y", nextY + "px");
-      raf = null;
+    var targetX = window.innerWidth / 2;
+    var targetY = window.innerHeight / 2;
+    var dotX = targetX;
+    var dotY = targetY;
+    var ringX = targetX;
+    var ringY = targetY;
+
+    function renderCursor() {
+      dotX += (targetX - dotX) * 0.65;
+      dotY += (targetY - dotY) * 0.65;
+      ringX += (targetX - ringX) * 0.18;
+      ringY += (targetY - ringY) * 0.18;
+
+      root.style.setProperty("--mouse-x", targetX + "px");
+      root.style.setProperty("--mouse-y", targetY + "px");
+      cursorDot.style.transform = "translate(" + dotX + "px, " + dotY + "px) translate(-50%, -50%)";
+      cursorRing.style.transform = "translate(" + ringX + "px, " + ringY + "px) translate(-50%, -50%)";
+      window.requestAnimationFrame(renderCursor);
     }
 
     window.addEventListener("pointermove", function (event) {
-      nextX = event.clientX;
-      nextY = event.clientY;
-      if (!raf) raf = window.requestAnimationFrame(updatePointerVars);
+      targetX = event.clientX;
+      targetY = event.clientY;
     });
 
+    document.querySelectorAll("a, button, [data-cursor-label], [data-tilt]").forEach(function (item) {
+      item.addEventListener("pointerenter", function () {
+        document.body.classList.add("cursor-active");
+        cursorRing.dataset.label = item.dataset.cursorLabel || "";
+      });
+      item.addEventListener("pointerleave", function () {
+        document.body.classList.remove("cursor-active");
+        cursorRing.dataset.label = "";
+      });
+    });
+
+    window.requestAnimationFrame(renderCursor);
+  }
+
+  if (finePointer && !reduceMotion) {
     document.querySelectorAll("[data-tilt]").forEach(function (card) {
       card.addEventListener("pointermove", function (event) {
         var rect = card.getBoundingClientRect();
@@ -60,16 +119,54 @@
         var y = (event.clientY - rect.top) / rect.height - 0.5;
         card.style.transform =
           "perspective(900px) rotateX(" +
-          (-y * 4).toFixed(2) +
+          (-y * 3.5).toFixed(2) +
           "deg) rotateY(" +
-          (x * 5).toFixed(2) +
-          "deg) translateY(-2px)";
+          (x * 4.5).toFixed(2) +
+          "deg)";
       });
       card.addEventListener("pointerleave", function () {
         card.style.transform = "";
       });
     });
   }
+
+  document.querySelectorAll("[data-live-loop]").forEach(function (board) {
+    var handle = board.querySelector(".loop-handle");
+    var dragging = false;
+
+    function moveHandle(event) {
+      var rect = board.getBoundingClientRect();
+      var x = Math.max(8, Math.min(92, ((event.clientX - rect.left) / rect.width) * 100));
+      var y = Math.max(12, Math.min(88, ((event.clientY - rect.top) / rect.height) * 100));
+      board.style.setProperty("--handle-x", x.toFixed(1) + "%");
+      board.style.setProperty("--handle-y", y.toFixed(1) + "%");
+    }
+
+    if (!handle) return;
+
+    handle.addEventListener("pointerdown", function (event) {
+      dragging = true;
+      handle.setPointerCapture(event.pointerId);
+      moveHandle(event);
+    });
+
+    handle.addEventListener("pointermove", function (event) {
+      if (dragging) moveHandle(event);
+    });
+
+    handle.addEventListener("pointerup", function (event) {
+      dragging = false;
+      handle.releasePointerCapture(event.pointerId);
+    });
+
+    handle.addEventListener("pointercancel", function () {
+      dragging = false;
+    });
+
+    board.addEventListener("pointermove", function (event) {
+      if (dragging) moveHandle(event);
+    });
+  });
 
   var revealItems = Array.from(document.querySelectorAll(".reveal"));
   if ("IntersectionObserver" in window && !reduceMotion) {
@@ -82,7 +179,7 @@
           }
         });
       },
-      { threshold: 0.16 }
+      { threshold: 0.14 }
     );
     revealItems.forEach(function (item) {
       observer.observe(item);
