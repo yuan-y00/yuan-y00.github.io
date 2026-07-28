@@ -926,6 +926,17 @@ button {
   font-size: 0.75rem;
 }
 
+.contact-direct {
+  margin: 0.9rem 0 0;
+  color: color-mix(in srgb, var(--text-secondary) 76%, transparent);
+  font-size: 0.62rem;
+}
+
+.contact-direct a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
 .footer-spacer {
   display: none;
 }
@@ -955,6 +966,12 @@ button {
 .footer div p:first-child {
   color: #ffffff;
   font-weight: 700;
+}
+
+.footer-contact {
+  margin-top: 0.2rem;
+  color: rgb(255 255 255 / 42%) !important;
+  font-size: 0.56rem !important;
 }
 
 .footer-links {
