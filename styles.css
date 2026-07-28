@@ -835,11 +835,18 @@ button {
   white-space: nowrap;
 }
 
-.experience-row p {
+.experience-row p,
+.experience-row ul {
   grid-column: 1 / -1;
   color: var(--text-secondary);
   font-size: 0.64rem;
   line-height: 1.55;
+}
+
+.experience-row ul {
+  display: grid;
+  gap: 0.35rem;
+  padding-left: 1.05rem;
 }
 
 .muted-row {
