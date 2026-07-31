@@ -20,11 +20,11 @@
   var fontLabel = document.querySelector("#font-label");
 
   function syncFontButton() {
-    var label = root.dataset.font === "serif" ? "SERIF" : "SANS";
+    var label = root.dataset.font === "serif" ? "衬线" : "无衬线";
     if (fontLabel) {
       fontLabel.textContent = label;
     } else if (fontButton) {
-      fontButton.textContent = "Aa " + label;
+      fontButton.textContent = "字体 " + label;
     }
   }
 
@@ -110,17 +110,32 @@
   }
 
   var srItems = Array.from(document.querySelectorAll(".sr"));
+
+  function revealItem(item) {
+    item.classList.add("sr-visible");
+  }
+
+  function revealVisibleItems() {
+    srItems.forEach(function (item) {
+      if (item.classList.contains("sr-visible")) return;
+      var rect = item.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 1.12) {
+        revealItem(item);
+      }
+    });
+  }
+
   if ("IntersectionObserver" in window && !reduceMotion) {
     var srObserver = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            entry.target.classList.add("sr-visible");
+            revealItem(entry.target);
             srObserver.unobserve(entry.target);
           }
         });
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+      { rootMargin: "12% 0px 12% 0px", threshold: 0 }
     );
 
     srItems.forEach(function (item) {
@@ -128,9 +143,13 @@
     });
   } else {
     srItems.forEach(function (item) {
-      item.classList.add("sr-visible");
+      revealItem(item);
     });
   }
+
+  revealVisibleItems();
+  window.addEventListener("scroll", revealVisibleItems, { passive: true });
+  window.addEventListener("resize", revealVisibleItems);
 
   var filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
   var galleryItems = Array.from(document.querySelectorAll(".cad-photo-wrap[data-category]"));
