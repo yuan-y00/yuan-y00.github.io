@@ -1429,18 +1429,22 @@ button {
 }
 
 .case-hero-refined .case-meta {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  max-width: 820px;
   margin-top: 1.45rem;
 }
 
 .case-hero-refined .case-meta div {
-  display: block;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 0.76rem 0.82rem;
-  background: color-mix(in srgb, var(--bg-card) 96%, var(--text-primary) 4%);
-  box-shadow: 0 8px 20px rgb(0 0 0 / 5%);
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 14px;
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  border-radius: 0;
+  padding: 12px 0 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .case-meta dt {
@@ -1455,7 +1459,7 @@ button {
 }
 
 .case-hero-refined .case-meta dd {
-  margin-top: 0.35rem;
+  margin-top: 0;
   font-size: 0.68rem;
   font-weight: 700;
   line-height: 1.45;
@@ -1635,8 +1639,8 @@ button {
 }
 
 .story-media-grid.service-media-row {
-  grid-template-columns: minmax(180px, 0.58fr) minmax(0, 1.42fr);
-  align-items: center;
+  grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
+  align-items: stretch;
   max-width: 820px;
 }
 
@@ -1691,16 +1695,23 @@ button {
 }
 
 .service-media-row .story-video {
-  width: min(100%, 300px);
+  width: 100%;
   margin: 0;
 }
 
 .service-media-row .story-figure {
+  height: 100%;
   margin: 0;
 }
 
+.service-media-row .story-figure button {
+  height: 100%;
+}
+
 .service-media-row .story-figure img {
-  aspect-ratio: 16 / 9;
+  display: block;
+  height: 100%;
+  aspect-ratio: auto;
   object-fit: cover;
 }
 
@@ -1784,7 +1795,6 @@ button {
   .case-metrics,
   .case-columns,
   .gallery-grid,
-  .story-media-grid.service-media-row,
   .story-media-grid.two-up,
   .story-media-grid.three-up {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1921,6 +1931,16 @@ button {
 
   .service-media-row .story-video {
     width: min(100%, 330px);
+  }
+
+  .service-media-row .story-figure,
+  .service-media-row .story-figure button,
+  .service-media-row .story-figure img {
+    height: auto;
+  }
+
+  .service-media-row .story-figure img {
+    aspect-ratio: 16 / 9;
   }
 
   .case-hero-refined h1 {
