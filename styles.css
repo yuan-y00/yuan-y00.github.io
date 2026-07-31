@@ -1606,6 +1606,28 @@ button {
   font-size: 0.62rem;
 }
 
+.story-video {
+  display: grid;
+  gap: 0.48rem;
+  width: min(100%, 360px);
+  margin: 0.55rem 0 0.85rem;
+}
+
+.story-video video {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: #000000;
+  box-shadow: var(--shadow-md);
+  object-fit: cover;
+}
+
+.story-video figcaption {
+  color: var(--text-secondary);
+  font-size: 0.62rem;
+}
+
 .story-summary {
   border-left: 4px solid var(--text-primary);
   padding: 0.75rem 0 0.75rem 1rem;
