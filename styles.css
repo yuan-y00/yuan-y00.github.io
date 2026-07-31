@@ -491,8 +491,10 @@ button {
 }
 
 .cad-gallery {
-  columns: 3;
-  column-gap: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: start;
 }
 
 .cad-photo-wrap {
@@ -500,7 +502,7 @@ button {
   display: block;
   break-inside: avoid;
   overflow: hidden;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0;
   border: 1px solid var(--border-color);
   border-radius: 14px;
   padding: 8px;
@@ -523,14 +525,17 @@ button {
 .cad-media {
   position: relative;
   overflow: hidden;
+  aspect-ratio: 16 / 10;
   border-radius: 8px;
   background: #f6f6f6;
 }
 
 .cad-photo-wrap img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
+  object-fit: cover;
+  object-position: center;
   transition: transform 0.55s cubic-bezier(0.25, 1, 0.5, 1), filter 0.35s ease;
 }
 
@@ -1873,8 +1878,8 @@ button {
   }
 
   .cad-gallery {
-    columns: 2;
-    column-gap: 0.75rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
   }
 
   .publication-grid,
@@ -2093,12 +2098,11 @@ button {
   }
 
   .cad-gallery {
-    columns: 2;
-    column-gap: 0.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
   }
 
   .cad-photo-wrap {
-    margin-bottom: 0.5rem;
     border-radius: 11px;
     padding: 5px;
   }
