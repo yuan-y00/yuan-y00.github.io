@@ -1792,18 +1792,22 @@ button {
 }
 
 .service-photo-stack .story-figure,
-.service-photo-stack .story-figure button,
-.service-photo-stack .story-figure img {
+.service-photo-stack .story-figure button {
   height: auto;
 }
 
-.service-photo-stack .story-figure img {
+.service-photo-stack .story-figure button {
+  display: grid;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  place-items: center;
+  background: #f8f8f6;
 }
 
-.service-booth-photo img {
-  object-position: center top;
+.service-photo-stack .story-figure img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: contain;
 }
 
 .story-video video {
