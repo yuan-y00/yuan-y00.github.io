@@ -910,13 +910,14 @@ button {
   font-size: 0.78rem;
 }
 
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.1rem;
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
+.content-link {
+  display: inline-flex;
+  margin-top: 1.35rem;
+  color: var(--text-primary);
+  font-size: 0.74rem;
   font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .contact-section {
