@@ -1623,6 +1623,8 @@ button {
 }
 
 .gallery-item button {
+  display: block;
+  width: 100%;
   overflow: hidden;
   border: 1px solid var(--border-color);
   border-radius: 14px;
@@ -1633,7 +1635,9 @@ button {
 .gallery-item img {
   width: 100%;
   aspect-ratio: 16 / 10;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
+  background: var(--bg-card);
 }
 
 .gallery-item figcaption,
