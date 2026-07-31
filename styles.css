@@ -1384,6 +1384,24 @@ button {
   font-size: clamp(2rem, 4vw, 3.6rem);
 }
 
+.case-hero-refined {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.95fr);
+  gap: clamp(28px, 5vw, 64px);
+}
+
+.case-hero-refined h1 {
+  max-width: 720px;
+  font-size: clamp(2.05rem, 3.25vw, 3.05rem);
+  line-height: 1.12;
+}
+
+.case-hero-refined > div > p:not(.eyebrow) {
+  max-width: 680px;
+  margin-top: 1rem;
+  font-size: 0.78rem;
+  line-height: 1.85;
+}
+
 .case-hero p,
 .case-section > p {
   color: var(--text-secondary);
@@ -1410,9 +1428,24 @@ button {
   padding-top: 12px;
 }
 
+.case-hero-refined .case-meta {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 1.45rem;
+}
+
+.case-hero-refined .case-meta div {
+  display: block;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.76rem 0.82rem;
+  background: color-mix(in srgb, var(--bg-card) 96%, var(--text-primary) 4%);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 5%);
+}
+
 .case-meta dt {
   color: var(--text-secondary);
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -1421,11 +1454,49 @@ button {
   margin: 0;
 }
 
+.case-hero-refined .case-meta dd {
+  margin-top: 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
 .case-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 1.5rem;
+}
+
+.case-actions .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  padding: 0.5rem 0.86rem;
+  font-size: 0.64rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    background 0.22s ease,
+    color 0.22s ease,
+    transform 0.22s ease;
+}
+
+.case-actions .button:hover {
+  transform: translateY(-2px);
+}
+
+.case-actions .button.primary {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.case-actions .button.secondary {
+  background: var(--bg-card);
+  color: var(--text-primary);
 }
 
 .case-section {
@@ -1820,9 +1891,19 @@ button {
   .case-metrics,
   .case-columns,
   .gallery-grid,
+  .case-hero-refined .case-meta,
   .story-media-grid.two-up,
   .story-media-grid.three-up {
     grid-template-columns: 1fr;
+  }
+
+  .case-hero-refined h1 {
+    font-size: clamp(1.55rem, 8vw, 2.2rem);
+  }
+
+  .case-hero-refined > div > p:not(.eyebrow) {
+    font-size: 0.7rem;
+    line-height: 1.72;
   }
 
   .case-story p {
