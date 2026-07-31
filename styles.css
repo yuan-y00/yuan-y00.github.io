@@ -1181,13 +1181,13 @@ button {
   min-height: 380px;
   max-height: 88vh;
   overflow: hidden;
-  background: #000000;
+  background: #f4f7f5;
 }
 
 .pm-img-wrap img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .pm-info {
