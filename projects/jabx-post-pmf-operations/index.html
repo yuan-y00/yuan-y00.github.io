@@ -10,6 +10,174 @@
     >
     <link rel="icon" href="../../assets/profile/avatar.webp">
     <link rel="stylesheet" href="../../styles.css">
+    <style>
+      .case-report .report-hero h1 {
+        max-width: 760px;
+        font-size: clamp(60px, 6vw, 64px);
+        line-height: 1.08;
+      }
+
+      .case-report .eyebrow,
+      .case-report .section-index {
+        font-size: 12px;
+      }
+
+      .case-report .report-lede {
+        max-width: 760px;
+        font-size: 18px;
+        line-height: 1.72;
+      }
+
+      .case-report .report-meta dt {
+        font-size: 12px;
+      }
+
+      .case-report .report-meta dd {
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .case-report .report-section > h2 {
+        font-size: 36px;
+        line-height: 1.22;
+      }
+
+      .case-report .sample-map h3 {
+        font-size: 20px;
+        line-height: 1.45;
+      }
+
+      .case-report .sample-map > p,
+      .case-report .sample-grid span {
+        font-size: 15.5px;
+        line-height: 1.75;
+      }
+
+      .case-report .sample-grid strong {
+        font-size: 12px;
+      }
+
+      .case-report .sample-grid small {
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      .case-report .sample-map .key-sentence,
+      .case-report .key-sentence {
+        font-size: 17px !important;
+        line-height: 1.72;
+      }
+
+      .case-report .star-section {
+        margin-top: clamp(52px, 7vw, 72px);
+      }
+
+      .case-report .star-section > h3 {
+        font-size: 26px;
+        line-height: 1.35;
+      }
+
+      .case-report .star-section > h3 span {
+        font-size: 13px;
+      }
+
+      .case-report .star-section h4 {
+        margin-top: 34px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .case-report .star-section p,
+      .case-report .star-section li {
+        font-size: 16px;
+        line-height: 1.82;
+      }
+
+      .case-report .story-figure figcaption {
+        font-size: 12.5px;
+        line-height: 1.6;
+      }
+
+      .case-report .flowchart-figure button {
+        display: grid;
+        height: clamp(520px, 55vw, 620px);
+        place-items: center;
+      }
+
+      .case-report .story-figure.contain-figure.flowchart-figure img {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: auto;
+        object-fit: contain;
+        object-position: center top;
+      }
+
+      @media (max-width: 768px) {
+        .case-report .report-hero h1 {
+          font-size: clamp(38px, 11vw, 42px);
+        }
+
+        .case-report .eyebrow,
+        .case-report .section-index,
+        .case-report .report-meta dt {
+          font-size: 11px;
+        }
+
+        .case-report .report-lede {
+          font-size: 16px;
+          line-height: 1.68;
+        }
+
+        .case-report .report-meta dd {
+          font-size: 13px;
+        }
+
+        .case-report .report-section > h2 {
+          font-size: 28px;
+        }
+
+        .case-report .sample-map h3 {
+          font-size: 18px;
+        }
+
+        .case-report .sample-map > p,
+        .case-report .sample-grid span {
+          font-size: 15px;
+        }
+
+        .case-report .sample-grid strong,
+        .case-report .sample-grid small {
+          font-size: 12px;
+        }
+
+        .case-report .sample-map .key-sentence,
+        .case-report .key-sentence {
+          font-size: 16px !important;
+        }
+
+        .case-report .star-section > h3 {
+          font-size: 21px;
+        }
+
+        .case-report .star-section h4 {
+          font-size: 14px;
+        }
+
+        .case-report .star-section p,
+        .case-report .star-section li {
+          font-size: 15px;
+          line-height: 1.75;
+        }
+
+        .case-report .story-figure figcaption {
+          font-size: 12px;
+        }
+
+        .case-report .flowchart-figure button {
+          height: 460px;
+        }
+      }
+    </style>
   </head>
   <body>
     <a class="skip-link" href="#main">跳到主要内容</a>
@@ -56,7 +224,7 @@
       <article class="report-body">
         <section class="report-section">
           <span class="section-index">01</span>
-          <h2>用户研究与运营</h2>
+          <h2>研究框架</h2>
 
           <div class="sample-map">
             <h3>先明确三类样本</h3>
@@ -93,6 +261,15 @@
               这类时间成本本身就是比普通问卷更强的支持证据。
             </p>
 
+            <p>同时结合 Tonal、Peloton 等竞品生态研究，重点了解：</p>
+            <ul>
+              <li>用户购买后如何被引导；</li>
+              <li>教练如何与用户建立关系；</li>
+              <li>用户如何被激励坚持；</li>
+              <li>社群如何让用户产生身份认同；</li>
+              <li>用户为什么愿意为持续反馈和训练结果付费。</li>
+            </ul>
+
             <figure class="story-figure wide contain-figure flowchart-figure">
               <button
                 type="button"
@@ -103,15 +280,6 @@
               </button>
               <figcaption>从现有用户池筛选、预热触达，到访谈、感谢和后续分层的用户运营流程。</figcaption>
             </figure>
-
-            <p>同时结合 Tonal、Peloton 等竞品生态研究，重点了解：</p>
-            <ul>
-              <li>用户购买后如何被引导；</li>
-              <li>教练如何与用户建立关系；</li>
-              <li>用户如何被激励坚持；</li>
-              <li>社群如何让用户产生身份认同；</li>
-              <li>用户为什么愿意为持续反馈和训练结果付费。</li>
-            </ul>
 
             <h4>R｜结果与结论</h4>
             <p>
