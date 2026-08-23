@@ -851,21 +851,29 @@ button {
   line-height: 1.3;
 }
 
-.experience-link {
-  display: inline-flex;
-  width: fit-content;
-  margin-top: 0.8rem;
-  color: var(--text-primary);
-  font-size: 0.64rem;
-  font-weight: 700;
-  line-height: 1.4;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color 0.22s ease;
+.experience-scope .experience-link-item {
+  border-color: var(--border-strong);
+  padding: 0;
 }
 
-.experience-link:hover {
-  color: var(--accent);
+.experience-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.48rem;
+  color: var(--text-primary);
+  font-size: inherit;
+  font-weight: 700;
+  line-height: inherit;
+  text-decoration: none;
+}
+
+.experience-link::after {
+  content: "↗";
+  margin-left: 0.3rem;
+}
+
+.experience-link-item:hover {
+  background: color-mix(in srgb, var(--bg-card) 86%, var(--text-primary) 14%);
 }
 
 .muted-row {
