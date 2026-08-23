@@ -21,6 +21,19 @@ def font(size, bold=False):
     return ImageFont.load_default()
 
 
+def font_zh(size, bold=False):
+    candidates = [
+        "C:/Windows/Fonts/msyhbd.ttc" if bold else "C:/Windows/Fonts/msyh.ttc",
+        "C:/Windows/Fonts/simhei.ttf",
+    ]
+    for candidate in candidates:
+        try:
+            return ImageFont.truetype(candidate, size)
+        except OSError:
+            pass
+    return font(size, bold)
+
+
 def open_rgb(path):
     img = Image.open(path)
     if img.mode == "RGBA":
@@ -116,6 +129,43 @@ def make_pmf_cover(dst):
     print(f"wrote: {dst}")
 
 
+def make_jabx_chinese_cover(dst, accent, title, subtitle, metrics, steps):
+    width, height = 1600, 1000
+    img = Image.new("RGB", (width, height), "#f5f7f7")
+    draw = ImageDraw.Draw(img)
+    for x in range(0, width, 80):
+        draw.line((x, 0, x, height), fill="#dce4e3", width=1)
+    for y in range(0, height, 80):
+        draw.line((0, y, width, y), fill="#dce4e3", width=1)
+
+    draw.rectangle((0, 0, 28, height), fill=accent)
+    draw.text((88, 86), "家庭健身机器人", font=font_zh(36, True), fill=accent)
+    draw.text((88, 150), title, font=font_zh(76, True), fill="#050505")
+    draw.text((90, 268), subtitle, font=font_zh(28, True), fill="#555b5a")
+
+    card_width = 326
+    for i, (value, label, body) in enumerate(metrics):
+        x = 88 + i * 366
+        draw.rounded_rectangle((x, 380, x + card_width, 578), radius=18, fill="#ffffff", outline="#d8d4cd", width=2)
+        draw.text((x + 30, 410), value, font=font_zh(58, True), fill="#050505")
+        draw.text((x + 30, 486), label, font=font_zh(23, True), fill=accent)
+        draw.text((x + 30, 526), body, font=font_zh(19), fill="#616562")
+
+    y = 672
+    for i, (step_title, body) in enumerate(steps):
+        x = 88 + i * 366
+        draw.ellipse((x, y, x + 60, y + 60), fill="#0b0b0b")
+        draw.text((x + 20, y + 12), str(i + 1), font=font_zh(26, True), fill="#ffffff")
+        if i < len(steps) - 1:
+            draw.line((x + 78, y + 30, x + 324, y + 30), fill="#e05b4d", width=5)
+        draw.text((x, y + 78), step_title, font=font_zh(30, True), fill="#050505")
+        draw.text((x, y + 125), body, font=font_zh(20), fill="#626763")
+
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    img.save(dst, "PNG", optimize=True)
+    print(f"wrote: {dst}")
+
+
 def make_sales_cover(dst):
     width, height = 1600, 1000
     img = Image.new("RGB", (width, height), "#f5f7f7")
@@ -192,6 +242,42 @@ def main():
     make_sales_cover(OUT / "projects/ai-fighting-robot-commercialization/cover.webp")
     make_sales_framework(OUT / "projects/ai-fighting-robot-commercialization/gallery/channel-system.webp")
     make_site_preview(OUT / "site-preview.webp")
+    make_jabx_chinese_cover(
+        OUT / "projects/jabx-north-america-pmf/cover-pmf.png",
+        "#1d8074",
+        "北美 PMF 论证",
+        "Kickstarter 前置：市场表达 / 问卷 / 行动承诺",
+        [
+            ("1,202", "累计 Leads", "可继续触达用户"),
+            ("459", "有效问卷", "三种表达反馈"),
+            ("35", "付费 VIP", "时间与金钱承诺"),
+            ("3", "市场表达", "Home 两版 + Robot"),
+        ],
+        [
+            ("需求", "商业目标与关键假设"),
+            ("方案", "三版页面与投放问卷"),
+            ("证据", "从点击到时间与付费"),
+            ("结论", "Home 近期 / Robot 长期"),
+        ],
+    )
+    make_jabx_chinese_cover(
+        OUT / "projects/jabx-post-pmf-operations/cover.png",
+        "#2d69c4",
+        "用户研究与运营",
+        "Leads 深访 / 内容分析 / 社区冷启动 / 用户共创 / 线下内测",
+        [
+            ("1,202", "Leads 用户池", "访谈与激活入口"),
+            ("100+", "健身 / 拳击", "WhatsApp 用户"),
+            ("50+", "Robot 用户", "独立兴趣社群"),
+            ("150+", "Reddit Karma", "24 小时冷启动"),
+        ],
+        [
+            ("访谈", "校验问卷并深挖"),
+            ("补样", "覆盖三类拳击样本"),
+            ("共创", "品牌命名与用户激活"),
+            ("内测", "观察真实使用行为"),
+        ],
+    )
 
     copies = [
         (

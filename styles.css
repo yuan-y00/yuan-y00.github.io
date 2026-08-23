@@ -1611,6 +1611,10 @@ button {
   margin-top: 24px;
 }
 
+.case-columns.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .case-column h3,
 .case-note h3 {
   margin: 0;
@@ -1626,6 +1630,42 @@ button {
 .case-column li,
 .case-note li {
   margin: 8px 0;
+}
+
+.evidence-ladder {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.evidence-ladder div {
+  min-width: 0;
+  border-top: 3px solid var(--teal-blue);
+  padding: 16px 14px 14px;
+  background: var(--bg-card);
+}
+
+.evidence-ladder strong,
+.evidence-ladder span,
+.evidence-ladder small {
+  display: block;
+}
+
+.evidence-ladder strong {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.evidence-ladder span {
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.evidence-ladder small {
+  margin-top: 6px;
+  color: var(--text-secondary);
+  line-height: 1.5;
 }
 
 .gallery-grid {
@@ -1895,6 +1935,11 @@ button {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .case-columns.three,
+  .evidence-ladder {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .case-hero {
     grid-template-columns: 1fr;
   }
@@ -2021,6 +2066,11 @@ button {
   .story-media-grid.service-media-row,
   .story-media-grid.two-up,
   .story-media-grid.three-up {
+    grid-template-columns: 1fr;
+  }
+
+  .case-columns.three,
+  .evidence-ladder {
     grid-template-columns: 1fr;
   }
 
