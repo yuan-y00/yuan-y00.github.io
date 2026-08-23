@@ -2272,11 +2272,6 @@ button {
   max-width: 760px;
 }
 
-.ranking-figure img {
-  aspect-ratio: 16 / 9;
-  background: var(--bg-card);
-}
-
 .email-proof-grid {
   align-items: start;
 }
