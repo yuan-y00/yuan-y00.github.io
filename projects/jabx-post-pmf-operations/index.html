@@ -98,6 +98,136 @@
         line-height: 1.6;
       }
 
+      .case-report .metric-strip {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin: 28px 0 34px;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .case-report .metric-strip > div {
+        min-width: 0;
+        padding: 20px 18px;
+        border-left: 1px solid var(--border-color);
+      }
+
+      .case-report .metric-strip > div:first-child {
+        border-left: 0;
+      }
+
+      .case-report .metric-strip strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 27px;
+        line-height: 1;
+      }
+
+      .case-report .metric-strip span {
+        display: block;
+        color: var(--text-secondary);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .case-report .detail-title {
+        margin: 34px 0 10px;
+        font-size: 18px;
+        line-height: 1.45;
+      }
+
+      .case-report .budget-summary {
+        margin: 30px 0 36px;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .case-report .budget-total {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 22px 0 18px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .case-report .budget-total span {
+        color: var(--text-secondary);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .case-report .budget-total strong {
+        font-size: 28px;
+        line-height: 1.2;
+      }
+
+      .case-report .budget-breakdown {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0;
+        margin: 0;
+      }
+
+      .case-report .budget-breakdown > div {
+        padding: 18px;
+        border-left: 1px solid var(--border-color);
+      }
+
+      .case-report .budget-breakdown > div:first-child {
+        padding-left: 0;
+        border-left: 0;
+      }
+
+      .case-report .budget-breakdown dt {
+        margin-bottom: 6px;
+        color: var(--text-secondary);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .case-report .budget-breakdown dd {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.55;
+      }
+
+      .case-report .test-flow {
+        margin: 18px 0 0;
+        padding: 0;
+        border-top: 1px solid var(--border-color);
+        list-style: none;
+        counter-reset: test-step;
+      }
+
+      .case-report .test-flow > li {
+        display: grid;
+        grid-template-columns: 34px minmax(0, 1fr);
+        column-gap: 14px;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--border-color);
+        counter-increment: test-step;
+      }
+
+      .case-report .test-flow > li::before {
+        content: counter(test-step, decimal-leading-zero);
+        color: var(--teal-blue);
+        font-size: 12px;
+        font-weight: 800;
+        line-height: 1.8;
+      }
+
+      .case-report .test-flow strong {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 16px;
+      }
+
+      .case-report .test-flow p {
+        margin: 0;
+      }
+
       .case-report .flowchart-figure button {
         display: grid;
         height: clamp(520px, 55vw, 620px);
@@ -171,6 +301,52 @@
 
         .case-report .story-figure figcaption {
           font-size: 12px;
+        }
+
+        .case-report .metric-strip {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .case-report .metric-strip > div {
+          padding: 17px 14px;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .case-report .metric-strip > div:nth-child(odd) {
+          border-left: 0;
+        }
+
+        .case-report .metric-strip > div:nth-last-child(-n + 2) {
+          border-bottom: 0;
+        }
+
+        .case-report .metric-strip strong {
+          font-size: 24px;
+        }
+
+        .case-report .detail-title {
+          font-size: 17px;
+        }
+
+        .case-report .budget-total {
+          display: block;
+        }
+
+        .case-report .budget-total strong {
+          display: block;
+          margin-top: 8px;
+          font-size: 24px;
+        }
+
+        .case-report .budget-breakdown {
+          grid-template-columns: 1fr;
+        }
+
+        .case-report .budget-breakdown > div,
+        .case-report .budget-breakdown > div:first-child {
+          padding: 14px 0;
+          border-top: 1px solid var(--border-color);
+          border-left: 0;
         }
 
         .case-report .flowchart-figure button {
@@ -260,6 +436,14 @@
               之后按照用户的拳击经验和家庭健身需求进行分层，针对重点用户做深度访谈。部分用户愿意投入两个小时与我们交流，
               这类时间成本本身就是比普通问卷更强的支持证据。
             </p>
+            <p>访谈围绕产品易用性、家庭使用场景、机器人进入家庭的接受度和购买顾虑展开，并与前期问卷结果交叉验证。</p>
+
+            <div class="metric-strip" aria-label="访谈与用户池关键数据">
+              <div><strong>50+</strong><span>场海外用户深度访谈</span></div>
+              <div><strong>35%+</strong><span>优化触达后的访谈响应率提升</span></div>
+              <div><strong>100+</strong><span>健身 / 拳击 WhatsApp 用户</span></div>
+              <div><strong>50+</strong><span>机器人方向 WhatsApp 用户</span></div>
+            </div>
 
             <p>同时结合 Tonal、Peloton 等竞品生态研究，重点了解：</p>
             <ul>
@@ -282,6 +466,10 @@
             </figure>
 
             <h4>R｜结果与结论</h4>
+            <p>
+              累计完成 <strong>50+ 场用户访谈</strong>。通过用户分层、邮件触达和 WhatsApp 跟进优化邀约节奏，访谈响应率提升 <strong>35%+</strong>，
+              并将访谈结果用于修正产品定位和后续用户运营重点。
+            </p>
             <p>
               访谈让我们确认：<strong>高客单价健身产品的价值不只是硬件和课程数量，更在于教练反馈、训练陪伴、社群关系和用户最终达成的结果。</strong>
             </p>
@@ -320,7 +508,7 @@
             <p>
               我使用新账号在 Reddit 发布社区原生内容，不直接发布广告，而是先通过生活方式和健身文化话题进入社区。
               相关帖子在 24 小时内获得
-              <a class="case-inline-link" href="https://www.reddit.com/r/AskAnAmerican/comments/1vsaqkj/do_americans_usually_run_outdoors_or_on/" target="_blank" rel="noreferrer"><strong>150+ Karma</strong> ↗</a>。
+              <a class="case-inline-link" href="https://www.reddit.com/r/AskAnAmerican/comments/1vsaqkj/do_americans_usually_run_outdoors_or_on/" target="_blank" rel="noreferrer"><strong>140+ Karma</strong> ↗</a>。
               随后通过评论互动和不同平台的私聊，接触那些从来没有选择过拳击的人，重点询问：
             </p>
             <ul>
@@ -329,6 +517,10 @@
               <li>对家庭健身有什么障碍；</li>
               <li>什么样的表达会让他们愿意了解产品。</li>
             </ul>
+            <p>
+              同时通过 Reddit、Instagram 等平台建联 <strong>20+ 位海外 KOC</strong>，根据对方的人设、兴趣点和社区语境调整沟通方式，
+              先建立自然互动，再邀请进入 WhatsApp 社群或参与长期产品共创。
+            </p>
 
             <h4>R｜结果与结论</h4>
             <p>这三类样本分别回答不同问题：</p>
@@ -337,6 +529,12 @@
               <li><strong>内容样本：</strong>已经参与拳击的人真实讨论什么；</li>
               <li><strong>私聊样本：</strong>从来没有选择拳击的人为什么没有进入这个市场。</li>
             </ul>
+            <div class="metric-strip" aria-label="海外社区运营关键数据">
+              <div><strong>140+</strong><span>单帖 24 小时 Karma</span></div>
+              <div><strong>10+</strong><span>深度互动并转入 WhatsApp 的潜在用户</span></div>
+              <div><strong>20+</strong><span>通过 Reddit、Instagram 建联的海外 KOC</span></div>
+              <div><strong>8</strong><span>持续参与沟通的长期种子用户</span></div>
+            </div>
             <p>
               Reddit 冷启动的价值也不是单纯获得 Karma，而是验证：<strong>在零信任的新账号状态下，能否通过社区原生内容找到用户愿意参与的讨论入口，
               并进一步获得真实的用户语言和市场信息。</strong>
@@ -414,15 +612,12 @@
           <div class="star-section">
             <h3><span>4</span>线下产品内测活动</h3>
             <h4>S/T｜需求</h4>
-            <p>问卷只能反映用户的想法，不能完全代表真实行为。</p>
-            <p>用户可能会在问卷里说“产品很有趣”，但真正拿到产品后：</p>
-            <ul>
-              <li>不一定会操作；</li>
-              <li>不一定愿意继续；</li>
-              <li>可能觉得实物和页面想象不同；</li>
-              <li>可能在真实对比后重新判断产品价值。</li>
-            </ul>
-            <p>所以线下内测的核心是观察用户真实体验产品时的行为。</p>
+            <p>问卷只能反映用户怎么说，线下内测需要把 JabX、跑步机和 Speediance 放进同一个体验场景与预算池，观察真实行为。测试重点是：</p>
+            <ol>
+              <li><strong>零拳击经验的健身人群能否顺利使用 JabX；</strong></li>
+              <li><strong>JabX 的互动性是否让用户比使用跑步机和 Speediance 更愿意持续；</strong></li>
+              <li><strong>三款产品进入同一个真实预算池时，用户是否会把 JabX 当作值得购买的家庭健身主设备。</strong></li>
+            </ol>
 
             <h4>A｜方案</h4>
             <p>我负责设计线下内测的整体方案，包括：</p>
@@ -435,14 +630,52 @@
               现场将 JabX 与 Speediance、跑步机进行对比体验，通过隐藏品牌、统一编号、固定体验流程和独立测试，减少品牌偏见、顺序效应和用户互相影响。
             </p>
 
-            <h4>R｜结论</h4>
-            <p>线下内测最终要回答的不是“用户说喜不喜欢”，而是：</p>
+            <div class="budget-summary" aria-label="线下内测预算">
+              <div class="budget-total"><span>预计总预算</span><strong>36,000–48,000 元</strong></div>
+              <dl class="budget-breakdown">
+                <div><dt>参与者招募</dt><dd>300–500 元 / 人，60 人约 18,000–30,000 元</dd></div>
+                <div><dt>场地</dt><dd>健身房或酒店会议室，8,000 元 / 天，共 2 天约 16,000 元</dd></div>
+                <div><dt>协助工具</dt><dd>问卷工具、体验课、水和线下招募物料等约 2,000 元</dd></div>
+              </dl>
+            </div>
+
+            <h5 class="detail-title">对参与者公开的信息</h5>
+            <p>
+              活动以“运动设备体验调研”对外招募：参与者在深圳西丽现场观看三段运动体验视频，依次体验三款设备，每台约 10 分钟，
+              并提交完整反馈。实际体验约 30 分钟，预约时预留 45 分钟。
+            </p>
+            <p>
+              完成三台设备体验和全部反馈后，参与者可在 <strong>3 次超级猩猩体验课</strong>与<strong>300 元现金红包</strong>中二选一；
+              未完成全部流程不计为有效样本。
+            </p>
+
+            <h5 class="detail-title">每名参与者的完整流程</h5>
+            <ol class="test-flow">
+              <li>
+                <div><strong>预约与到场前确认</strong><p>发送地址、到场时间、穿着建议、预计时长、参与感谢和迟到处理规则，并为每人分配唯一编号。</p></div>
+              </li>
+              <li>
+                <div><strong>签到与信息核对</strong><p>核对联系方式、运动背景、拳击经验、家庭设备和临时身体状况，发放编号卡、设备顺序卡并安排专属工作人员。</p></div>
+              </li>
+              <li>
+                <div><strong>视频选择与三款设备体验</strong><p>先观看三段视频记录第一吸引力，再按顺序卡体验设备；报名问卷、视频选择、观察表和最终问卷始终使用同一编号。</p></div>
+              </li>
+              <li>
+                <div><strong>自由选择、反馈与离场</strong><p>完成三款设备后填写对比问卷，回答持续使用和购买选择问题，提交反馈并现场确认参与感谢。</p></div>
+              </li>
+            </ol>
+
+            <h4>R｜当前进展与判定标准</h4>
+            <p>
+              正式招募前，我先通过海外社媒定向邀约，在<strong>不购买样本、不投放招募广告</strong>的情况下，邀请 <strong>20 位在深外籍人士</strong>
+              作为首批体验候选人，用于验证招募话术、人群匹配和现场沟通方式，并为本地化体验积累一手素材。
+            </p>
+            <p>正式测试完成后，不只看“用户说喜不喜欢”，而是依据以下行为和选择判断：</p>
             <ul>
               <li>用户能否自然上手；</li>
-              <li>使用过程中是否产生真实兴趣；</li>
-              <li>看到实物后是否改变原本判断；</li>
-              <li>互动体验是否比传统设备更能让用户继续；</li>
-              <li>用户是否认为它值得被纳入自己的家庭健身方案。</li>
+              <li>体验过程中是否主动延长使用或继续尝试；</li>
+              <li>与跑步机、Speediance 对比后，是否更愿意持续使用 JabX；</li>
+              <li>面对同一预算约束时，是否将 JabX 选为家庭健身主设备。</li>
             </ul>
             <p class="key-sentence"><strong>线下体验是从“用户表达认可”走向“用户实际表现认可”的一步。</strong></p>
           </div>
