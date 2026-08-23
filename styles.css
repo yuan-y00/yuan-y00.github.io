@@ -851,6 +851,23 @@ button {
   line-height: 1.3;
 }
 
+.experience-link {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 0.8rem;
+  color: var(--text-primary);
+  font-size: 0.64rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.22s ease;
+}
+
+.experience-link:hover {
+  color: var(--accent);
+}
+
 .muted-row {
   opacity: 0.78;
 }
