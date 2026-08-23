@@ -228,6 +228,101 @@
         margin: 0;
       }
 
+      .case-report .research-cohorts {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin: 24px 0 32px;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .case-report .research-cohorts > div {
+        padding: 20px;
+        border-left: 1px solid var(--border-color);
+      }
+
+      .case-report .research-cohorts > div:first-child {
+        border-left: 0;
+      }
+
+      .case-report .research-cohorts strong,
+      .case-report .research-cohorts span,
+      .case-report .research-cohorts small {
+        display: block;
+      }
+
+      .case-report .research-cohorts strong {
+        margin-bottom: 8px;
+        color: var(--teal-blue);
+        font-size: 12px;
+      }
+
+      .case-report .research-cohorts span {
+        margin-bottom: 6px;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 1.45;
+      }
+
+      .case-report .research-cohorts small {
+        color: var(--text-secondary);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .case-report .research-question-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin: 24px 0 34px;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .case-report .research-question-grid > section {
+        padding: 20px;
+        border-left: 1px solid var(--border-color);
+      }
+
+      .case-report .research-question-grid > section:first-child {
+        border-left: 0;
+      }
+
+      .case-report .research-question-grid h6 {
+        margin: 0 0 10px;
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      .case-report .research-question-grid p {
+        margin: 0;
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 1.75;
+      }
+
+      .case-report .research-table-figure,
+      .case-report .research-chart-figure {
+        max-width: 820px;
+        margin-top: 28px;
+      }
+
+      .case-report .research-table-figure button,
+      .case-report .research-chart-figure button {
+        background: #fff;
+      }
+
+      .case-report .research-table-figure img,
+      .case-report .research-chart-figure img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: auto;
+        object-fit: contain;
+      }
+
+      .case-report .research-chart-figure figcaption strong {
+        color: var(--text-primary);
+      }
+
       .case-report .flowchart-figure button {
         display: grid;
         height: clamp(520px, 55vw, 620px);
@@ -347,6 +442,30 @@
           padding: 14px 0;
           border-top: 1px solid var(--border-color);
           border-left: 0;
+        }
+
+        .case-report .research-cohorts,
+        .case-report .research-question-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .case-report .research-cohorts > div,
+        .case-report .research-cohorts > div:first-child,
+        .case-report .research-question-grid > section,
+        .case-report .research-question-grid > section:first-child {
+          padding: 16px 0;
+          border-top: 1px solid var(--border-color);
+          border-left: 0;
+        }
+
+        .case-report .research-cohorts > div:first-child,
+        .case-report .research-question-grid > section:first-child {
+          border-top: 0;
+        }
+
+        .case-report .research-chart-figure figcaption,
+        .case-report .research-table-figure figcaption {
+          font-size: 12px;
         }
 
         .case-report .flowchart-figure button {
@@ -476,67 +595,117 @@
           </div>
 
           <div class="star-section">
-            <h3><span>2</span>定量研究、平台内容分析与社区冷启动</h3>
+            <h3><span>2</span>定量用户调研：内容编码与私信补样</h3>
             <h4>S/T｜需求</h4>
             <p>
-              PMF 广告只能触达已经对拳击有兴趣的人。对于完全不感兴趣、从来没有考虑过拳击的人，他们不会点击我们的广告，
-              因此需要单独补充这一部分数据。
+              PMF 广告天然偏向已经对拳击感兴趣的人，无法解释美国市场中更广泛的运动人群为什么没有选择拳击，也无法判断用户尝试后放弃、
+              或持续参与的真正原因。因此，这项研究需要同时覆盖传统有氧、未选择拳击、尝试后放弃和持续拳击四类问题。
             </p>
-            <p>
-              但平台内容分析也有局限：已经持续拳击或参与拳击的人，才更可能主动讨论拳击的好处和问题；从来没有选择过拳击的人，
-              通常不会留下拳击相关内容。
-            </p>
-            <p>因此需要建立三类样本：</p>
+            <p><strong>有运动健身需求</strong>的筛选口径为：买过至少一件健身设备、办过健身房或普拉提 / 舞蹈等课程卡，或每月运动时间超过 60 分钟。</p>
+
+            <div class="research-cohorts" aria-label="拳击用户分组定义">
+              <div><strong>A｜未选择</strong><span>有运动需求，但没有选择拳击</span><small>询问是否考虑过拳击；如果从未考虑，追问为什么没想过；如果考虑过，追问最终没有选择的原因。</small></div>
+              <div><strong>B｜尝试后放弃</strong><span>至少体验过 1 次，目前已经停止</span><small>了解最初为什么尝试、当时最吸引的因素、体验次数和停止的主要原因。</small></div>
+              <div><strong>C｜持续拳击</strong><span>累计体验至少 3 次，目前每月至少 1 次</span><small>了解为什么选择并持续、相较其他运动的吸引力，以及训练中仍未解决的痛点。</small></div>
+            </div>
+
+            <p>研究要回答五个问题：</p>
             <ul>
-              <li>已经对拳击感兴趣的人；</li>
-              <li>已经参与或持续讨论拳击的人；</li>
-              <li>从来没有想过拳击的人。</li>
+              <li>有运动需求的人如何评价传统有氧，主要不满是什么；</li>
+              <li>有运动需求的人为什么没有选择拳击；</li>
+              <li>拳击尝试者最初为什么选择，又为什么放弃；</li>
+              <li>持续拳击者为什么继续；</li>
+              <li>持续拳击者仍然面临哪些训练痛点。</li>
             </ul>
 
             <h4>A｜方案</h4>
-            <p>第一类样本来自 Meta 广告、落地页和问卷。</p>
-            <p>第二类样本来自 Reddit、Instagram 等平台的内容分析，包括：</p>
-            <ul>
-              <li>用户讨论的拳击场景；</li>
-              <li>用户对家庭健身的表达；</li>
-              <li>用户对教练、课程和社群的评价；</li>
-              <li>高互动内容的主题和语言；</li>
-              <li>用户自然使用的痛点表达。</li>
-            </ul>
-            <p>第三类样本通过 Reddit 冷启动和跨平台私聊获得。</p>
             <p>
-              我使用新账号在 Reddit 发布社区原生内容，不直接发布广告，而是先通过生活方式和健身文化话题进入社区。
-              相关帖子在 24 小时内获得
-              <a class="case-inline-link" href="https://www.reddit.com/r/AskAnAmerican/comments/1vsaqkj/do_americans_usually_run_outdoors_or_on/" target="_blank" rel="noreferrer"><strong>140+ Karma</strong> ↗</a>。
-              随后通过评论互动和不同平台的私聊，接触那些从来没有选择过拳击的人，重点询问：
+              研究前对比了消费者样本库、全案市场研究公司、付费研究参与者平台、Meta 广告招募、目标社区私信和公开内容研究。
+              考虑到付费样本中的用户可能已经非常熟悉品牌测试流程，最终采用<strong>公开内容编码 + 目标用户私信</strong>的组合：前者提供自然发生的用户表达，后者补齐不会主动讨论拳击的人。
             </p>
-            <ul>
-              <li>为什么没有考虑拳击；</li>
-              <li>他们平时选择什么运动；</li>
-              <li>对家庭健身有什么障碍；</li>
-              <li>什么样的表达会让他们愿意了解产品。</li>
-            </ul>
+            <h5 class="detail-title">第一步：公开内容定量编码</h5>
             <p>
-              同时通过 Reddit、Instagram 等平台建联 <strong>20+ 位海外 KOC</strong>，根据对方的人设、兴趣点和社区语境调整沟通方式，
-              先建立自然互动，再邀请进入 WhatsApp 社群或参与长期产品共创。
+              从 Reddit、Facebook 群组、博客和 YouTube 评论中收集已有用户表达，不做泛泛的舆情浏览，而是先定义问题和编码选项，
+              再统计每类原因出现的次数。按研究主题分工，每人目标完成 <strong>300 条有效内容编码</strong>。
+            </p>
+            <p>
+              管理表统一记录昵称、来源平台、来源出处、评论原文、中文翻译、问题归因、运动类型、是否符合运动需求定义、年龄和国家；
+              不确定项单独标记，避免为了凑结论而强行归类。
+            </p>
+
+            <figure class="story-figure wide contain-figure research-table-figure">
+              <button type="button" data-lightbox-src="../../assets/projects/jabx-post-pmf-operations/gallery/content-coding-management.png" data-lightbox-alt="定量用户调研内容编码管理表">
+                <img src="../../assets/projects/jabx-post-pmf-operations/gallery/content-coding-management.png" width="1867" height="824" alt="定量用户调研内容编码管理表，包含来源、原文、翻译、问题分类、运动类型和用户条件等字段" loading="lazy">
+              </button>
+              <figcaption>内容编码管理表：保留原始语料和来源，再用统一标签归因并生成分类仪表盘。点击查看完整字段。</figcaption>
+            </figure>
+
+            <h5 class="detail-title">第二步：私信目标用户补充缺失样本</h5>
+            <p>
+              公开内容更容易覆盖已经讨论拳击的人，但从来没有考虑过拳击的人通常不会留下相关内容。因此通过 Reddit、Instagram 等平台私信符合运动需求定义的用户，
+              目标触达 <strong>100 位</strong>，先询问日常运动、当前不满和是否想增加新运动，再根据经历进入 A / B / C 分支。
+            </p>
+            <p>
+              <strong>共性问题：</strong>平时主要做什么运动？现在这些运动方式怎么样、有什么不满意？如果用户没有主动提到单调，再追问是否会觉得单调、重复或容易腻；最后询问有没有想过换一种或增加一种新的运动方式，以及原因。
+            </p>
+
+            <div class="research-question-grid" aria-label="三类用户私信问题">
+              <section><h6>A｜未选择拳击</h6><p>有没有考虑过拳击或搏击操？如果没有，为什么从没想过；如果考虑过，最后为什么没有选？</p></section>
+              <section><h6>B｜尝试后放弃</h6><p>当初为什么尝试、什么最吸引你、体验过几次或多久，后来为什么没有继续？</p></section>
+              <section><h6>C｜持续拳击</h6><p>为什么选择并继续？和其他运动相比最吸引你的是什么？现在还有哪些不满意或希望改善的地方？</p></section>
+            </div>
+
+            <p>所有用户结束前都会被询问是否愿意接受后续访谈；愿意则预约时间，不愿意则不再继续邀约。</p>
+
+            <p>
+              为了进入目标社区，我使用新账号发布社区原生话题，相关 Reddit 帖子在 24 小时内获得
+              <a class="case-inline-link" href="https://www.reddit.com/r/AskAnAmerican/comments/1vsaqkj/do_americans_usually_run_outdoors_or_on/" target="_blank" rel="noreferrer"><strong>140+ Karma</strong> ↗</a>；
+              后续与 <strong>10+ 位潜在用户</strong>深度互动并转入 WhatsApp，同时建联 <strong>20+ 位海外 KOC</strong>，其中 8 位持续参与长期沟通。
             </p>
 
             <h4>R｜结果与结论</h4>
-            <p>这三类样本分别回答不同问题：</p>
-            <ul>
-              <li><strong>广告样本：</strong>什么样的人会主动进入拳击相关产品漏斗；</li>
-              <li><strong>内容样本：</strong>已经参与拳击的人真实讨论什么；</li>
-              <li><strong>私聊样本：</strong>从来没有选择拳击的人为什么没有进入这个市场。</li>
-            </ul>
-            <div class="metric-strip" aria-label="海外社区运营关键数据">
-              <div><strong>140+</strong><span>单帖 24 小时 Karma</span></div>
-              <div><strong>10+</strong><span>深度互动并转入 WhatsApp 的潜在用户</span></div>
-              <div><strong>20+</strong><span>通过 Reddit、Instagram 建联的海外 KOC</span></div>
-              <div><strong>8</strong><span>持续参与沟通的长期种子用户</span></div>
-            </div>
+            <p>以下比例反映的是各主题<strong>有效编码样本中的原因结构</strong>，用于比较问题优先级，不直接等同于全美国消费者的总体发生率。</p>
+            <figure class="story-figure wide contain-figure research-chart-figure">
+              <button type="button" data-lightbox-src="../../assets/projects/jabx-post-pmf-operations/gallery/cardio-pain-analysis.png" data-lightbox-alt="传统有氧运动存在的痛点定量分析">
+                <img src="../../assets/projects/jabx-post-pmf-operations/gallery/cardio-pain-analysis.png" width="1286" height="428" alt="传统有氧运动存在的痛点饼图" loading="lazy">
+              </button>
+              <figcaption><strong>传统有氧（n=180）：</strong>时间、家庭或外部环境限制占 26.67%，设备故障与维护问题占 19.44%，枯燥和缺乏动力占 18.89%。</figcaption>
+            </figure>
+
+            <figure class="story-figure wide contain-figure research-chart-figure">
+              <button type="button" data-lightbox-src="../../assets/projects/jabx-post-pmf-operations/gallery/non-boxer-barriers.png" data-lightbox-alt="有运动需求的人不选择拳击的原因">
+                <img src="../../assets/projects/jabx-post-pmf-operations/gallery/non-boxer-barriers.png" width="1320" height="454" alt="有运动需求的人不选择拳击的原因饼图" loading="lazy">
+              </button>
+              <figcaption><strong>没有选择拳击（n=263）：</strong>体能、伤病或身体条件不适合占 35.36%，担心头部受击或长期脑损伤占 20.53%，拳馆时间安排限制占 19.77%。</figcaption>
+            </figure>
+
+            <figure class="story-figure wide contain-figure research-chart-figure">
+              <button type="button" data-lightbox-src="../../assets/projects/jabx-post-pmf-operations/gallery/boxing-choice-drivers.png" data-lightbox-alt="用户为什么选择拳击">
+                <img src="../../assets/projects/jabx-post-pmf-operations/gallery/boxing-choice-drivers.png" width="1286" height="480" alt="用户选择拳击的原因饼图" loading="lazy">
+              </button>
+              <figcaption><strong>选择拳击（n=235）：</strong>喜欢拳击本身或享受训练体验占 42.98%，提升体能、健康或心理状态占 27.23%，参加比赛或追求特定目标占 16.60%。</figcaption>
+            </figure>
+
+            <figure class="story-figure wide contain-figure research-chart-figure">
+              <button type="button" data-lightbox-src="../../assets/projects/jabx-post-pmf-operations/gallery/boxing-dropout-reasons.png" data-lightbox-alt="拳击放弃者停止训练的原因">
+                <img src="../../assets/projects/jabx-post-pmf-operations/gallery/boxing-dropout-reasons.png" width="1286" height="402" alt="拳击放弃者停止训练的原因饼图" loading="lazy">
+              </button>
+              <figcaption><strong>尝试后放弃（n=117）：</strong>伤病、健康或身体条件限制占 38.46%，时间、家庭或生活阶段变化占 17.95%，担心头部受击或长期脑损伤占 15.38%。</figcaption>
+            </figure>
+
+            <figure class="story-figure wide contain-figure research-chart-figure">
+              <button type="button" data-lightbox-src="../../assets/projects/jabx-post-pmf-operations/gallery/boxing-persistent-painpoints.png" data-lightbox-alt="持续拳击用户的训练痛点">
+                <img src="../../assets/projects/jabx-post-pmf-operations/gallery/boxing-persistent-painpoints.png" width="1286" height="454" alt="持续拳击用户的训练痛点饼图" loading="lazy">
+              </button>
+              <figcaption><strong>持续拳击者的痛点（n=250）：</strong>头部受击或安全风险占 50.80%，伤病、疼痛或恢复限制占 25.60%，教练、课程或拳馆管理体验占 18.40%。</figcaption>
+            </figure>
+
+            <p class="key-sentence">
+              <strong>核心结论：用户并不排斥拳击的互动性和训练体验，真正阻碍进入与坚持的是伤病和头部风险、身体门槛、场馆时间以及线下训练成本。</strong>
+            </p>
             <p>
-              Reddit 冷启动的价值也不是单纯获得 Karma，而是验证：<strong>在零信任的新账号状态下，能否通过社区原生内容找到用户愿意参与的讨论入口，
-              并进一步获得真实的用户语言和市场信息。</strong>
+              这意味着 JabX 不应只被表达成一台“拳击训练设备”，而应提取拳击中好玩、能释放压力、能提升体能和获得即时反馈的部分，
+              同时降低真人对抗、头部受击、固定场馆和固定课程时间带来的门槛。
             </p>
           </div>
 
