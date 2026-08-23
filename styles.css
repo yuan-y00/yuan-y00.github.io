@@ -861,7 +861,7 @@ button {
 
 .publication-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.75rem;
   align-items: stretch;
 }
@@ -952,6 +952,14 @@ button {
   object-fit: contain;
 }
 
+.cover-video-still {
+  background: #101114;
+}
+
+.cover-video-still img {
+  object-fit: contain;
+}
+
 [data-theme="dark"] .content-cover {
   background: #151515;
 }
@@ -966,6 +974,14 @@ button {
   flex-direction: column;
   min-height: 0;
   padding: 1.35rem 1.45rem 1.45rem;
+}
+
+.project-content .content-platform {
+  margin: 0 0 0.58rem;
+  color: var(--accent);
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 .project-content h3 {
