@@ -2027,6 +2027,52 @@ button {
   font-size: 0.7rem !important;
 }
 
+.report-visual,
+.report-visual-grid {
+  margin-top: 28px;
+}
+
+.report-visual + p,
+.report-visual-grid + p {
+  margin-top: 24px;
+}
+
+.report-landing-grid .story-figure img {
+  height: 100%;
+  aspect-ratio: auto;
+  object-position: top center;
+}
+
+.report-landing-grid .story-figure button {
+  height: clamp(240px, 32vw, 320px);
+}
+
+.report-evidence-figure button {
+  height: clamp(320px, 42vw, 440px);
+}
+
+.story-figure.contain-figure.report-evidence-figure img {
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center center;
+}
+
+.report-funnel-grid .story-figure button {
+  background: #f8f8f6;
+}
+
+.report-funnel-grid .story-figure button {
+  height: clamp(200px, 24vw, 248px);
+}
+
+.report-funnel-grid .story-figure.contain-figure img {
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center center;
+}
+
 .star-section blockquote {
   margin: 16px 0 0;
   border-top: 1px solid var(--border-strong);
