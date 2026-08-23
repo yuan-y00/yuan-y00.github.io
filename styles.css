@@ -861,7 +861,7 @@ button {
 
 .publication-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.75rem;
   align-items: stretch;
 }
@@ -991,6 +991,38 @@ button {
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+.content-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: auto;
+  padding-top: 1.3rem;
+}
+
+.content-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 0.34rem 0.62rem;
+  color: var(--text-primary);
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-decoration: none;
+  transition:
+    border-color 0.22s ease,
+    background 0.22s ease,
+    transform 0.22s ease;
+}
+
+.content-tag:hover {
+  border-color: var(--border-strong);
+  background: color-mix(in srgb, var(--bg-card) 86%, var(--text-primary) 14%);
+  transform: translateY(-2px);
 }
 
 .article-list,
