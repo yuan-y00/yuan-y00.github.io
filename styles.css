@@ -884,6 +884,53 @@ button {
   padding: 2rem 0 5rem;
 }
 
+.skills-section {
+  padding: 0.2rem 0 3.2rem;
+}
+
+.skill-groups {
+  display: grid;
+  gap: 1rem;
+}
+
+.skill-group h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.58rem;
+  margin: 0 0 0.42rem;
+  color: var(--text-secondary);
+  font-size: 0.64rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.skill-group h3::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+}
+
+.skill-tags span {
+  display: inline-flex;
+  min-height: 25px;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 0.16rem 0.46rem;
+  background: color-mix(in srgb, var(--bg-card) 94%, var(--text-primary) 6%);
+  color: var(--text-primary);
+  font-size: 0.57rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
 .tools-section {
   padding: 0.55rem 0 4rem;
 }
@@ -2633,6 +2680,19 @@ button {
 
   .experience-scope {
     gap: 0.34rem;
+  }
+
+  .skills-section {
+    padding: 0.2rem 0 2.8rem;
+  }
+
+  .skill-groups {
+    gap: 0.9rem;
+  }
+
+  .skill-tags span {
+    min-height: 24px;
+    font-size: 0.56rem;
   }
 
   .tools-section {
