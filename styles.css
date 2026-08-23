@@ -2258,6 +2258,54 @@ button {
   aspect-ratio: 16 / 7.4;
 }
 
+.story-figure.contain-figure button {
+  background: var(--bg-card);
+}
+
+.story-figure.contain-figure img {
+  aspect-ratio: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.flowchart-figure {
+  max-width: 760px;
+}
+
+.ranking-figure img {
+  aspect-ratio: 16 / 9;
+  background: var(--bg-card);
+}
+
+.email-proof-grid {
+  align-items: start;
+}
+
+.email-figure button {
+  display: grid;
+  aspect-ratio: 16 / 10;
+  place-items: center;
+  background: var(--bg-card);
+}
+
+.email-figure img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+.case-inline-link {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+.case-inline-link:hover {
+  color: var(--teal-blue);
+}
+
 .story-figure figcaption {
   color: var(--text-secondary);
   font-size: 0.62rem;
