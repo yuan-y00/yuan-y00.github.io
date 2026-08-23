@@ -1417,6 +1417,18 @@ button {
   object-fit: contain;
 }
 
+#photo-modal.media-wide .pm-img-wrap img {
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (min-width: 769px) {
+  #photo-modal.media-wide .pm-card {
+    grid-template-columns: minmax(0, 62%) minmax(0, 38%);
+    max-width: 1100px;
+  }
+}
+
 .pm-info {
   display: flex;
   min-height: 0;

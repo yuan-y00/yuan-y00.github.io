@@ -255,6 +255,7 @@
   function closeProjectModal() {
     if (!modal || !modalImage) return;
     modal.classList.remove("open");
+    modal.classList.remove("media-wide");
     modal.setAttribute("aria-hidden", "true");
     modalImage.removeAttribute("src");
     modalImage.alt = "";
@@ -274,6 +275,7 @@
     modalDesc.textContent = desc;
     modalImage.src = image;
     modalImage.alt = title;
+    modal.classList.toggle("media-wide", card.dataset.modalLayout === "wide");
     modalTools.innerHTML = "";
     tools.forEach(function (tool) {
       var tag = document.createElement("span");
