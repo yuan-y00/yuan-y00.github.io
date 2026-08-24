@@ -31,11 +31,6 @@
   --cream-white: #111111;
 }
 
-[data-font="serif"] {
-  --site-font: "Cormorant Garamond", Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
-  --root-font-size: 17px;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -236,7 +231,7 @@ button {
   transform: scaleX(1);
 }
 
-.font-toggle,
+.language-toggle,
 .theme-toggle,
 .hamburger {
   border: none;
@@ -245,7 +240,7 @@ button {
   cursor: pointer;
 }
 
-.font-toggle {
+.language-toggle {
   display: flex;
   align-items: center;
   gap: 0.24rem;
@@ -255,7 +250,17 @@ button {
   font-weight: 500;
 }
 
-.font-toggle:hover,
+.language-toggle [data-lang-option] {
+  opacity: 0.42;
+  transition: opacity 0.2s ease;
+}
+
+.language-toggle [data-lang-option].is-active {
+  opacity: 1;
+  font-weight: 700;
+}
+
+.language-toggle:hover,
 .theme-toggle:hover {
   opacity: 0.62;
 }
@@ -1681,7 +1686,7 @@ button {
 }
 
 .case-hero h1 {
-  font-size: clamp(2rem, 4vw, 3.6rem);
+  font-size: clamp(1.86rem, 3.5vw, 3.05rem);
 }
 
 .case-hero-refined {
@@ -1691,7 +1696,7 @@ button {
 
 .case-hero-refined h1 {
   max-width: 720px;
-  font-size: clamp(2.05rem, 3.25vw, 3.05rem);
+  font-size: clamp(1.86rem, 2.9vw, 2.65rem);
   line-height: 1.12;
 }
 
@@ -1702,7 +1707,7 @@ button {
 
 .ai-robot-case .case-hero-refined h1 {
   max-width: 650px;
-  font-size: clamp(1.86rem, 3vw, 2.7rem);
+  font-size: clamp(1.72rem, 2.7vw, 2.42rem);
   line-height: 1.14;
 }
 
@@ -2954,7 +2959,7 @@ button {
     font-size: 0.72rem;
   }
 
-  .font-toggle {
+  .language-toggle {
     font-size: 0.65rem;
   }
 

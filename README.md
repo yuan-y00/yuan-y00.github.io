@@ -1,6 +1,6 @@
 # Yuan Portfolio
 
-这是 Yuan / 李雯媛的个人作品集网站，发布目标为 GitHub Pages：
+这是 Yuan 的个人作品集网站，发布目标为 GitHub Pages：
 
 https://yuan-y00.github.io/
 
