@@ -851,37 +851,24 @@ button {
   line-height: 1.3;
 }
 
-.experience-tag-link {
-  display: block;
-  color: inherit;
-  text-decoration: none;
-}
-
-.experience-tag-link:hover,
-.experience-tag-link:focus-visible {
-  color: var(--text-primary);
-}
-
 .experience-scope .experience-link-item {
-  flex-basis: 100%;
   border: 0;
-  margin-top: 0.16rem;
   padding: 0;
   background: transparent;
 }
 
 .experience-link {
   display: inline-flex;
-  min-height: 26px;
+  min-height: 20px;
   align-items: center;
   border: 1px solid var(--border-strong);
   border-radius: 4px;
-  padding: 0.18rem 0.48rem;
+  padding: 0.22rem 0.48rem;
   background: var(--bg-card);
   color: var(--text-primary);
-  font-size: 0.58rem;
+  font-size: inherit;
   font-weight: 700;
-  line-height: 1.25;
+  line-height: inherit;
   text-decoration: none;
   white-space: nowrap;
   transition:
