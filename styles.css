@@ -836,7 +836,7 @@ button {
 .experience-scope {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.28rem;
   margin-top: 0.7rem;
   padding: 0;
   list-style: none;
@@ -845,10 +845,10 @@ button {
 .experience-scope li {
   border: 1px solid var(--border-color);
   border-radius: 4px;
-  padding: 0.22rem 0.48rem;
+  padding: 0.16rem 0.42rem;
   color: var(--text-secondary);
-  font-size: 0.58rem;
-  line-height: 1.3;
+  font-size: 0.54rem;
+  line-height: 1.2;
 }
 
 .experience-scope .experience-link-item {
@@ -859,11 +859,11 @@ button {
 
 .experience-link {
   display: inline-flex;
-  min-height: 20px;
+  min-height: 18px;
   align-items: center;
   border: 1px solid var(--border-strong);
   border-radius: 4px;
-  padding: 0.22rem 0.48rem;
+  padding: 0.16rem 0.42rem;
   background: var(--bg-card);
   color: var(--text-primary);
   font-size: inherit;
